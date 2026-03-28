@@ -1,0 +1,18 @@
+# PyInstaller
+build/
+dist/
+*.spec
+
+# ZIP
+*.zip
+
+# Output audio files
+output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp files
+*.tmp

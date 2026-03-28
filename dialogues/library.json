@@ -1,0 +1,196 @@
+{
+  "modules": [
+    {
+      "id": "M1",
+      "title": "MODULE 1 — Professional Communication & Interview Skills",
+      "lessons": [
+        {
+          "id": "L1",
+          "title": "L1 · Professional Introduction & Role Awareness",
+          "dialogues": [
+            {
+              "title": "First day — meeting a colleague",
+              "speakers": ["Alex", "Sarah"],
+              "text": "[Alex]: Good morning. I don't think we've met. I'm Alex — I just joined the sales team.\n[Sarah]: Hi Alex, welcome aboard. I'm Sarah, Sales Manager for the EMEA region. How are you settling in?\n[Alex]: Pretty well, thank you. I'm still getting to grips with the systems. I'll be responsible for key accounts in the chemical sector.\n[Sarah]: That's a great area. We have strong existing relationships there. Are you reporting to Mark?\n[Alex]: Yes, directly. He mentioned you'd be a good person to talk to about the client portfolio.\n[Sarah]: Absolutely. Let's grab a coffee this week and I'll walk you through the main accounts."
+            },
+            {
+              "title": "Self-introduction at a business meeting",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Dmitry]: Good afternoon, everyone. Allow me to briefly introduce myself. I'm Dmitry, Sales Manager at ChemCo International. I'm responsible for developing new client partnerships across the industrial chemicals segment.\n[Client]: Nice to meet you, Dmitry. I'm James, Procurement Director at EuroChem. We've heard good things about your product range.\n[Dmitry]: Thank you, James. We work closely with companies in your sector and have built a solid reputation for quality and reliability. I look forward to exploring how we can add value for your business."
+            }
+          ]
+        },
+        {
+          "id": "L2",
+          "title": "L2 · Company Structure & Corporate Communication",
+          "dialogues": [
+            {
+              "title": "Explaining company structure to a new partner",
+              "speakers": ["Dmitry", "Partner"],
+              "text": "[Dmitry]: Let me give you a quick overview of how we're structured. Our headquarters is in Frankfurt, and we operate through regional subsidiaries across Europe and Asia.\n[Partner]: And where does the sales function sit in that structure?\n[Dmitry]: Sales reports directly to the executive board. Within the sales division, we have separate teams for key accounts, new business, and technical support.\n[Partner]: So if there's a technical issue with a product, who would we escalate to?\n[Dmitry]: You'd go through your account manager — that's me — and I'd coordinate with the technical team and escalate to management if needed. The decision-making process is quite straightforward."
+            },
+            {
+              "title": "Internal cross-department briefing",
+              "speakers": ["Alex", "Sarah"],
+              "text": "[Alex]: Sarah, could you help me understand how sales interacts with the supply chain team here?\n[Sarah]: Of course. We work very closely with operations. When we close a deal, we immediately loop in supply chain to align on lead times and stock levels.\n[Alex]: And what about the finance team — are they involved early in the process?\n[Sarah]: Yes, particularly for large accounts. Finance reviews payment terms and credit limits before we finalize any contract. It's a cross-functional process, which keeps everyone aligned."
+            }
+          ]
+        },
+        {
+          "id": "L3",
+          "title": "L3 · Business Politeness & Diplomatic Language",
+          "dialogues": [
+            {
+              "title": "Handling a difficult request diplomatically",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Client]: We need a 20% discount on the next order. That's non-negotiable.\n[Dmitry]: I appreciate you sharing that, and I completely understand the pressure to manage costs. From our perspective, a 20% reduction would be quite challenging given current raw material prices.\n[Client]: So what can you offer us?\n[Dmitry]: We would appreciate the opportunity to review the full scope of the order. If volumes are higher, there may be room for a more competitive structure. Would it be possible to schedule a call with both teams this week to explore options?\n[Client]: That seems reasonable. Let's set something up."
+            },
+            {
+              "title": "Disagreeing politely in a team meeting",
+              "speakers": ["Alex", "Sarah"],
+              "text": "[Alex]: I think we should prioritize the Eastern European market for Q3 expansion.\n[Sarah]: I see where you're coming from, and there's definitely potential there. However, from my perspective, we might need to reconsider the timing given the current logistics challenges in that region.\n[Alex]: That's a fair point. There seems to be a risk we haven't fully accounted for.\n[Sarah]: Exactly. We would appreciate running a risk assessment first. Perhaps we could pilot with one or two accounts before committing the full budget?\n[Alex]: That sounds like a sensible approach. Let's put that forward to management."
+            }
+          ]
+        },
+        {
+          "id": "L4",
+          "title": "L4 · Small Talk & Professional Rapport",
+          "dialogues": [
+            {
+              "title": "Warming up before a client meeting",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Dmitry]: James, great to see you again. How was your trip from London?\n[Client]: Not too bad, thank you — the flight was on time for once. How are things on your end?\n[Dmitry]: Very well, thank you. Hope you had a good weekend. I heard the weather in London was finally decent.\n[Client]: Ha, for about two days, yes. Shall we get started once everyone's in the room?\n[Dmitry]: Of course. Before we move on to the main agenda, can I get you a coffee or some water?\n[Client]: Coffee would be great, thank you. Black, no sugar."
+            }
+          ]
+        },
+        {
+          "id": "L5",
+          "title": "L5 · Job Interview: HR Questions",
+          "dialogues": [
+            {
+              "title": "HR interview — Tell me about yourself",
+              "speakers": ["Interviewer", "Dmitry"],
+              "text": "[Interviewer]: Dmitry, thank you for coming in today. Let's start with — tell me a little bit about yourself.\n[Dmitry]: Thank you for having me. I have over five years of experience in B2B sales within the chemical industry. Currently, I'm responsible for managing key accounts and driving new business development in the industrial segment. I'm results-driven and have consistently exceeded my annual targets.\n[Interviewer]: That's impressive. What would you say is your greatest professional strength?\n[Dmitry]: I'd say my ability to build long-term client relationships. I have a hands-on approach — I don't just close deals, I stay involved throughout the delivery process to ensure the client is fully satisfied.\n[Interviewer]: And what about an area you're actively working on?\n[Dmitry]: I've been focusing on strengthening my presentation skills in international settings. I'm currently completing a Business English course to make sure I communicate as clearly and professionally as possible."
+            }
+          ]
+        },
+        {
+          "id": "L6",
+          "title": "L6 · Job Interview: Sales & Business Focus",
+          "dialogues": [
+            {
+              "title": "Sales interview — KPIs and achievements",
+              "speakers": ["Interviewer", "Dmitry"],
+              "text": "[Interviewer]: Can you walk me through your sales process and how you manage your pipeline?\n[Dmitry]: Of course. I typically start by qualifying leads based on their budget, timeline, and strategic fit. I maintain a structured pipeline in our CRM system and track conversion rates at each stage — from first contact through to contract signing.\n[Interviewer]: What was your biggest commercial achievement in the last twelve months?\n[Dmitry]: I secured a long-term contract with a major industrial client that represented a 30% increase in annual revenue for my region. The negotiation was complex — it involved pricing, payment terms, and delivery schedules — but we reached a solution that worked for both sides.\n[Interviewer]: How do you typically handle key account management?\n[Dmitry]: I believe in regular touchpoints — not just when there's an issue. I schedule quarterly business reviews with all my key accounts to assess performance against targets and identify new opportunities."
+            }
+          ]
+        },
+        {
+          "id": "L7",
+          "title": "L7 · Interview Traps & Clarifying Questions",
+          "dialogues": [
+            {
+              "title": "Handling a tricky interview question",
+              "speakers": ["Interviewer", "Dmitry"],
+              "text": "[Interviewer]: Tell me about a time you failed to meet your sales target. What happened?\n[Dmitry]: If I understand correctly, you're asking about a specific situation where I missed a KPI?\n[Interviewer]: Exactly.\n[Dmitry]: Let me think for a moment. In Q2 last year, we were significantly below our new business target due to a major client putting their decision on hold unexpectedly. Could you please clarify whether you'd like me to focus on how it affected the team, or specifically on how I personally responded?\n[Interviewer]: Focus on your personal response.\n[Dmitry]: I immediately re-prioritized my pipeline, identified three alternative prospects, and worked closely with the technical team to accelerate their evaluation process. We recovered approximately 80% of the gap by the end of Q3."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "MODULE 3 — Sales, Negotiation & Commercial Terms",
+      "lessons": [
+        {
+          "id": "M3L1",
+          "title": "Price Negotiation",
+          "dialogues": [
+            {
+              "title": "Negotiating price and volume discount",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Client]: We've reviewed your quotation, and frankly, your pricing is above market level.\n[Dmitry]: I appreciate the feedback, James. Our pricing reflects the quality of the product and the service level we guarantee. That said, I'd like to understand your volume expectations better.\n[Client]: We're looking at roughly 500 metric tons per quarter. If you can adjust your net price, we're prepared to sign a 12-month contract.\n[Dmitry]: A 500-ton quarterly commitment is significant. Let me check what we can structure in terms of a volume-based pricing model. Would a tiered discount work for you — for instance, a base price with reductions at 200, 350, and 500 tons?\n[Client]: That could work. What numbers are we talking?\n[Dmitry]: I'd need to confirm internally, but I'm confident we can offer a competitive structure. Can we reconvene on Thursday once I have the figures from finance?"
+            },
+            {
+              "title": "Discussing Incoterms and payment terms",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Client]: We'd prefer DDP terms for the delivery. Can you accommodate that?\n[Dmitry]: DDP is possible, though it will affect the overall pricing since we'd be absorbing all freight and customs costs. Can I ask — which destination port or warehouse are you working with?\n[Client]: Our main distribution center is in Rotterdam.\n[Dmitry]: Rotterdam works well for us. For DDP Rotterdam, I'd factor in approximately 8 to 10% on top of the EXW price. Alternatively, if you're comfortable handling customs clearance, CIF Rotterdam would give you a cleaner price.\n[Client]: Let's go with CIF then. And in terms of payment — we typically work on 60-day net.\n[Dmitry]: Our standard terms are 30-day net with an advance payment of 20%. For a long-term partner, we can discuss 45-day net, but 60 days would need approval from our finance team and may require a letter of credit."
+            }
+          ]
+        },
+        {
+          "id": "M3L2",
+          "title": "Handling Objections",
+          "dialogues": [
+            {
+              "title": "Client objections — product specs and competition",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Client]: We've been approached by a competitor with a lower price for what seems to be a similar product.\n[Dmitry]: I understand, and it's always worth exploring your options. May I ask — is the competing product meeting the same purity specification? Our product is certified to 99.5% purity, which is critical for your application.\n[Client]: They claim 99.2%.\n[Dmitry]: That 0.3% difference may seem small, but in chemical processes it can significantly affect yield and downstream quality. Beyond that, we offer full technical support and guaranteed lead times of 10 business days. I'd be happy to share our recent client performance data if that would help your evaluation.\n[Client]: Yes, that would be useful. Can you also confirm your shelf life and storage requirements?\n[Dmitry]: Of course. The shelf life is 24 months from production date, and the product should be stored in a cool, dry environment away from direct sunlight. I'll send you the full technical data sheet and SDS this afternoon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "MODULE 4 — Reporting, Numbers & Presentations",
+      "lessons": [
+        {
+          "id": "M4L1",
+          "title": "Sales Reports & KPIs",
+          "dialogues": [
+            {
+              "title": "Presenting Q3 results to management",
+              "speakers": ["Dmitry", "Manager"],
+              "text": "[Manager]: Dmitry, walk us through the Q3 performance for your region.\n[Dmitry]: Of course. Revenue for Q3 came in at 2.4 million euros, which represents a 12% growth compared to the same quarter last year. However, we were 8% below our internal target.\n[Manager]: What drove the variance?\n[Dmitry]: Two main factors. First, one of our key accounts delayed a large order due to a production shutdown on their side — that alone accounts for roughly 150,000 euros of the gap. Second, new business conversion took longer than projected in the Eastern segment.\n[Manager]: What's the outlook for Q4?\n[Dmitry]: I'm cautiously optimistic. The delayed order has been rescheduled for October, and we have three promising proposals in late-stage negotiation. Our forecast for Q4 is 2.8 million euros, which would bring us in line with the annual target."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "MODULE 5 — Logistics, Payments & Claims",
+      "lessons": [
+        {
+          "id": "M5L1",
+          "title": "Claims & Complaints Handling",
+          "dialogues": [
+            {
+              "title": "Handling a quality claim diplomatically",
+              "speakers": ["Client", "Dmitry"],
+              "text": "[Client]: Dmitry, I need to raise a formal issue. The last batch we received — lot number 4472 — showed quality deviation. Purity was below the certified specification.\n[Dmitry]: James, I'm sorry to hear that, and I want to assure you we take this very seriously. Can you share the test results so I can initiate an internal investigation?\n[Client]: I'll send them over today. We're looking at compensation — the material had to be returned, which caused a production delay.\n[Dmitry]: I completely understand, and we'll work to resolve this as quickly as possible. Let me involve our quality control team immediately. Once we've reviewed the findings, we'll come back to you with a formal response within 48 hours.\n[Client]: We also need a replacement shipment urgently — our production line depends on it.\n[Dmitry]: I'll prioritize that. I'll check our current stock levels now and arrange an expedited shipment. You'll have a confirmed timeline by end of day."
+            },
+            {
+              "title": "Explaining a delivery delay",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Dmitry]: James, I'm calling to give you an update on your shipment — order reference 8821.\n[Client]: Is there a problem?\n[Dmitry]: Unfortunately, there has been an unexpected delay at the port of departure due to customs documentation requirements. The shipment is currently on hold for approximately three additional days.\n[Client]: This is going to affect our production schedule.\n[Dmitry]: I fully understand, and I sincerely apologize for the disruption. I want to be transparent — the delay is outside our direct control, but we should have flagged the risk earlier. Is there anything we can do to mitigate the impact on your side in the meantime?\n[Client]: Can you at least confirm the new ETA?\n[Dmitry]: Yes, the revised estimated arrival date is the 14th. I'll send written confirmation within the hour and will continue to update you daily until the goods are delivered."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "MODULE 6 — Chemical Industry English",
+      "lessons": [
+        {
+          "id": "M6L1",
+          "title": "Product Specs & Technical Discussions",
+          "dialogues": [
+            {
+              "title": "Discussing technical specifications with a client",
+              "speakers": ["Dmitry", "Client"],
+              "text": "[Client]: We need to verify that your product meets our application requirements before we place an order.\n[Dmitry]: Of course. What are the key parameters you're working with?\n[Client]: We need a minimum purity of 99%, a specific concentration range of 35 to 38%, and a shelf life of at least 18 months.\n[Dmitry]: All three parameters are within our standard specification. Our product is certified at 99.5% purity, concentration is controlled at 36.5%, and the shelf life is 24 months from production date.\n[Client]: Good. Do you have a current SDS and technical data sheet?\n[Dmitry]: Yes, I'll send the full documentation package today — that includes the SDS, technical data sheet, and the most recent batch certificate of analysis. Is there anything specific about handling or storage requirements you'd like me to clarify?\n[Client]: Just confirm storage temperature.\n[Dmitry]: Storage should be between 5 and 25 degrees Celsius, away from heat sources and direct sunlight. The product should be kept in a sealed container to prevent contamination."
+            },
+            {
+              "title": "Quality deviation — internal sales and QC discussion",
+              "speakers": ["Dmitry", "QC Manager"],
+              "text": "[Dmitry]: Anna, I need your help urgently. We've received a claim from EuroChem about lot 4472 — purity deviation below spec.\n[QC Manager]: I'm aware — we're already pulling the batch records. Do you know what specification they tested against?\n[Dmitry]: They used their in-house method, but they're certified to the same ISO standard we use.\n[QC Manager]: We'll need to check whether the deviation could be related to shipping conditions or if it's a production issue. Was the product stored and transported correctly on their end?\n[Dmitry]: I've asked them to share the full chain of custody documentation. How long do you need for the investigation?\n[QC Manager]: Give us 24 hours for the preliminary review. If the non-conformance originated on our side, we'll issue a corrective action report and arrange a replacement at no cost.\n[Dmitry]: That's exactly what I told the client. I'll keep them updated and coordinate on the replacement shipment once we have clarity."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
