@@ -87,13 +87,29 @@ def safe_name(s: str) -> str:
     return re.sub(r'[\\/:*?"<>|]', "_", s).strip()[:50]
 
 
-# ── Ядро синтеза (без GUI) ─────────────────────────────────────────────────────
+# ── Кэш тишины — генерируется один раз ───────────────────────────────────────
+_SILENCE_CACHE: dict[float, str] = {}
+
+def _get_silence(pause_sec: float) -> str:
+    """Возвращает путь к MP3-файлу тишины (кэшируется)."""
+    if pause_sec not in _SILENCE_CACHE:
+        tmp = tempfile.mktemp(suffix=".mp3")
+        subprocess.run(
+            [FFMPEG, "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
+             "-t", str(pause_sec), "-q:a", "9", tmp],
+            capture_output=True
+        )
+        _SILENCE_CACHE[pause_sec] = tmp
+    return _SILENCE_CACHE[pause_sec]
+
+
+# ── Ядро синтеза — все реплики параллельно ────────────────────────────────────
 def synth_dialogue(text: str, voice_map: dict, out_path: str, rate_str: str,
                    log_cb=None, progress_cb=None) -> bool:
     """
     Синтезирует диалог в MP3-файл.
     voice_map: {speaker_name: voice_id}
-    Возвращает True при успехе.
+    Все реплики запрашиваются параллельно через asyncio.gather().
     """
     import edge_tts
 
@@ -104,42 +120,45 @@ def synth_dialogue(text: str, voice_map: dict, out_path: str, rate_str: str,
 
     tmp_dir = tempfile.mkdtemp()
     try:
-        # Тишина между репликами
-        sil = os.path.join(tmp_dir, "sil.mp3")
-        subprocess.run([FFMPEG, "-y", "-f", "lavfi",
-                        "-i", f"anullsrc=r=24000:cl=mono",
-                        "-t", str(PAUSE_SEC), "-q:a", "9", sil],
-                       capture_output=True)
-
-        loop = asyncio.new_event_loop()
-        mp3_files = []
+        sil = _get_silence(PAUSE_SEC)
+        completed = [0]
 
         async def synth_one(speaker, line_text, idx):
             vid = voice_map.get(speaker)
             if not vid:
                 if log_cb: log_cb(f"  ⚠ {speaker} — голос не задан, пропуск")
-                return None
-            preview = line_text[:50] + ("…" if len(line_text) > 50 else "")
-            if log_cb: log_cb(f"  [{idx+1}/{len(lines)}] {speaker}: {preview}")
+                return idx, None
             p = os.path.join(tmp_dir, f"line_{idx:04d}.mp3")
             await edge_tts.Communicate(line_text, vid, rate=rate_str).save(p)
-            return p
+            completed[0] += 1
+            if log_cb:
+                preview = line_text[:50] + ("…" if len(line_text) > 50 else "")
+                log_cb(f"  ✓ [{completed[0]}/{len(lines)}] {speaker}: {preview}")
+            if progress_cb:
+                progress_cb(completed[0] / len(lines))
+            return idx, p
 
-        for idx, (spk, lt) in enumerate(lines):
-            p = loop.run_until_complete(synth_one(spk, lt, idx))
+        # Все реплики — одновременно
+        async def run_all():
+            tasks = [synth_one(spk, lt, idx) for idx, (spk, lt) in enumerate(lines)]
+            return await asyncio.gather(*tasks)
+
+        loop = asyncio.new_event_loop()
+        results = loop.run_until_complete(run_all())
+        loop.close()
+
+        # Собрать в правильном порядке
+        mp3_files = []
+        for idx, p in sorted(results, key=lambda x: x[0]):
             if p and os.path.exists(p):
                 mp3_files.append(p)
                 mp3_files.append(sil)
-            if progress_cb:
-                progress_cb((idx + 1) / len(lines))
-
-        loop.close()
 
         if not mp3_files:
             if log_cb: log_cb("❌ Нет аудио-сегментов")
             return False
 
-        # Склейка
+        # Склейка через ffmpeg concat
         cl = os.path.join(tmp_dir, "list.txt")
         with open(cl, "w", encoding="utf-8") as f:
             for p in mp3_files:
@@ -147,7 +166,8 @@ def synth_dialogue(text: str, voice_map: dict, out_path: str, rate_str: str,
 
         os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
         r = subprocess.run(
-            [FFMPEG, "-y", "-f", "concat", "-safe", "0", "-i", cl, "-c", "copy", out_path],
+            [FFMPEG, "-y", "-f", "concat", "-safe", "0",
+             "-i", cl, "-c", "copy", "-threads", "0", out_path],
             capture_output=True, text=True
         )
         if r.returncode != 0:
@@ -157,9 +177,7 @@ def synth_dialogue(text: str, voice_map: dict, out_path: str, rate_str: str,
         return True
 
     finally:
-        # Не удаляем tmp если это output_file (для одиночного режима)
-        if tmp_dir != os.path.dirname(out_path):
-            shutil.rmtree(tmp_dir, ignore_errors=True)
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -577,75 +595,73 @@ class App(ctk.CTk):
         threading.Thread(target=self._batch_worker, args=(out_root, rate), daemon=True).start()
 
     def _batch_worker(self, out_root: str, rate: str):
-        # Собрать все диалоги из библиотеки
+        # Собрать все диалоги
         all_items = []
         for mod in LIBRARY.get("modules", []):
             for les in mod.get("lessons", []):
                 for dial in les.get("dialogues", []):
+                    speakers = dial.get("speakers", []) or list(
+                        dict.fromkeys(re.findall(r'\[([^\]]+)\]:', dial["text"])))
                     all_items.append({
                         "mod_id":    mod.get("id", "M"),
                         "mod_title": mod["title"],
                         "les_id":    les.get("id", "L"),
                         "les_title": les["title"],
                         "title":     dial["title"],
-                        "speakers":  dial.get("speakers", []),
+                        "voice_map": {sp: VOICES[DEFAULT_VOICES[j % len(DEFAULT_VOICES)]]
+                                      for j, sp in enumerate(speakers[:4])},
                         "text":      dial["text"],
                     })
 
         total = len(all_items)
-        done = 0
-        skipped = 0
-        errors = 0
+        self._log(f"📦 Всего диалогов: {total}  (параллельная генерация по 3)")
 
-        self._log(f"📦 Всего диалогов: {total}")
+        counters = {"done": 0, "skipped": 0, "errors": 0}
 
-        for i, d in enumerate(all_items):
-            # Имена файлов и папок
+        def _upd_label():
+            self.after(0, lambda: self.batch_progress_lbl.configure(
+                text=f"Готово: {counters['done']}  "
+                     f"Пропущено: {counters['skipped']}  "
+                     f"Ошибок: {counters['errors']}"))
+
+        def process_one(i, d):
             mod_dir  = safe_name(f"{d['mod_id']}_{d['mod_title'][:35]}")
             les_dir  = safe_name(f"{d['les_id']}_{d['les_title'][:35]}")
             out_path = os.path.join(out_root, mod_dir, les_dir,
                                     safe_name(d["title"]) + ".mp3")
 
-            label = f"[{i+1}/{total}] {d['title']}"
-
-            # Пропустить уже готовые
             if os.path.exists(out_path):
-                self._log(f"  ⏩ {label} — уже есть")
-                skipped += 1
-                self.after(0, lambda v=(i+1)/total: self.progress.set(v))
-                self.after(0, lambda l=label, sk=skipped, d2=done, e=errors:
-                           self.batch_progress_lbl.configure(
-                               text=f"Готово: {d2}  Пропущено: {sk}  Ошибок: {e}"))
-                continue
-
-            self._log(f"🎙 {label}")
-
-            # Назначить голоса автоматически по порядку
-            speakers = d["speakers"]
-            if not speakers:
-                speakers = list(dict.fromkeys(re.findall(r'\[([^\]]+)\]:', d["text"])))
-            voice_map = {sp: VOICES[DEFAULT_VOICES[j % len(DEFAULT_VOICES)]]
-                         for j, sp in enumerate(speakers[:4])}
-
-            os.makedirs(os.path.dirname(out_path), exist_ok=True)
-            ok = synth_dialogue(
-                d["text"], voice_map, out_path, rate,
-                log_cb=self._log,
-            )
-            if ok:
-                done += 1
-                sz = os.path.getsize(out_path) // 1024
-                self._log(f"  ✅ {sz} KB → {os.path.basename(out_path)}")
+                self._log(f"  ⏩ [{i+1}/{total}] {d['title']} — уже есть")
+                counters["skipped"] += 1
             else:
-                errors += 1
+                self._log(f"🎙 [{i+1}/{total}] {d['title']}")
+                os.makedirs(os.path.dirname(out_path), exist_ok=True)
+                ok = synth_dialogue(d["text"], d["voice_map"], out_path, rate,
+                                    log_cb=self._log)
+                if ok:
+                    counters["done"] += 1
+                    self._log(f"  ✅ {os.path.getsize(out_path)//1024} KB")
+                else:
+                    counters["errors"] += 1
 
             self.after(0, lambda v=(i+1)/total: self.progress.set(v))
-            self.after(0, lambda d2=done, sk=skipped, e=errors:
-                       self.batch_progress_lbl.configure(
-                           text=f"Готово: {d2}  Пропущено: {sk}  Ошибок: {e}"))
+            _upd_label()
 
-        self._log(f"\n🎉 Завершено! Готово: {done}, Пропущено: {skipped}, Ошибок: {errors}")
-        self._log(f"📂 Папка: {out_root}")
+        # Параллельная обработка — 3 диалога одновременно
+        # (каждый диалог внутри уже параллелит реплики)
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            futs = {pool.submit(process_one, i, d): i for i, d in enumerate(all_items)}
+            for f in as_completed(futs):
+                try:
+                    f.result()
+                except Exception as e:
+                    self._log(f"  ❌ Ошибка потока: {e}")
+                    counters["errors"] += 1
+
+        self._log(f"\n🎉 Завершено! Готово: {counters['done']}, "
+                  f"Пропущено: {counters['skipped']}, Ошибок: {counters['errors']}")
+        self._log(f"📂 {out_root}")
         self.after(0, self._reset_batch)
 
     def _reset_batch(self):
