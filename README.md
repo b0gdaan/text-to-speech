@@ -1,14 +1,14 @@
-# Business English TTS — D:\said
+# Business English Text-to-Speech
 
 Локальный генератор аудио-диалогов для курса Business English (Chemical Sales).
-Kokoro TTS · CUDA · RTX 4060 · полностью офлайн и бесплатно.
+Kokoro TTS · Python · CUDA. После установки зависимостей и загрузки модели генерация выполняется локально; наличие подходящего GPU зависит от конфигурации.
 
 ---
 
 ## Структура проекта
 
 ```
-D:\said\
+text-to-speech/
 ├── main.py              ← главное приложение
 ├── install.bat          ← установка зависимостей
 ├── run.bat              ← быстрый запуск
@@ -29,7 +29,7 @@ D:\said\
 
 ## Библиотека диалогов
 
-В `dialogues/library.json` уже загружены диалоги по курсу Дмитрия:
+В `dialogues/library.json` находятся примеры учебных диалогов:
 
 | Модуль | Темы |
 |--------|------|

@@ -16,3 +16,17 @@ __pycache__/
 
 # Temp files
 *.tmp
+
+# Local credentials and development artifacts
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+.venv/
+venv/
